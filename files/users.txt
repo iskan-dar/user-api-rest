@@ -1,0 +1,7 @@
+Dan Abramov 30 true
+Tim Berners-Lee 67 false
+Ryan Dahl 41 true
+Linus Torvalds 52 true
+Brendan Eich 61 false
+Igor Sysoev 51 false
+Håkan Wium-Lie 57 true
