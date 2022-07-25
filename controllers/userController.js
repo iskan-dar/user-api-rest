@@ -2,7 +2,7 @@ const { User } = require('../db/models');
 const UserDto = require('../dtos/userDto');
 const ApiError = require('../exceptions/apiError');
 
-// handles GET /users
+// handles GET /api/v1/users
 module.exports.getUsers = async (req, res, next) => {
     try {
         const users = await User.findAll();
@@ -13,7 +13,7 @@ module.exports.getUsers = async (req, res, next) => {
     }
 };
 
-// handles POST /users
+// handles POST /api/v1/users
 module.exports.createUser = async (req, res, next) => {
     try {
         const { firstName, lastName, age, isFree } = req.body;
@@ -35,7 +35,7 @@ module.exports.createUser = async (req, res, next) => {
     }
 };
 
-// handles GET /users/:id
+// handles GET /api/v1/users/:id
 module.exports.getUser = async (req, res, next) => {
     try {
         const id = Number.parseInt(req.params.id, 10);
@@ -52,7 +52,7 @@ module.exports.getUser = async (req, res, next) => {
     }
 };
 
-// handles PUT /users/:id
+// handles PUT /api/v1/users/:id
 module.exports.replaceUser = async (req, res, next) => {
     try {
         const id = Number.parseInt(req.params.id, 10);
@@ -87,7 +87,7 @@ module.exports.replaceUser = async (req, res, next) => {
     }
 };
 
-// handles PATCH /users/:id
+// handles PATCH /api/v1/users/:id
 module.exports.updateUser = async (req, res, next) => {
     try {
         const id = Number.parseInt(req.params.id, 10);
@@ -100,9 +100,9 @@ module.exports.updateUser = async (req, res, next) => {
         // let's create an object with retrieved values
         const reqBody = { firstName, lastName, age, isFree };
 
-        // let's remove falsy values if there are any
+        // let's remove any null or undefined values if there are any
         Object.keys(reqBody).forEach((key) => {
-            if (!reqBody[key]) delete reqBody[key];
+            if (reqBody[key] === null || reqBody[key] === undefined) delete reqBody[key];
         });
 
         // now we check if we had any valid values provided
@@ -120,7 +120,7 @@ module.exports.updateUser = async (req, res, next) => {
     }
 };
 
-// handles DELETE /users/:id
+// handles DELETE /api/v1/users/:id
 module.exports.deleteUser = async (req, res, next) => {
     try {
         const id = Number.parseInt(req.params.id, 10);
